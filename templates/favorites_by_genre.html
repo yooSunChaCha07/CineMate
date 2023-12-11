@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Favorite Movies in {{ genre_name }} Genre{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Back to All Favorites Link -->    
+    <p class="mb-4 title">Favorite Movies in "{{ genre_name }}" Genre</p>
+    {% if genre_movies %}
+        <table class="table table-hover" style="vertical-align: middle; margin-bottom: 30px;">
+            <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie_title, movie_poster, imdb_url in genre_movies %}
+                    <tr>
+                        <td>
+                            <img src="{{ movie_poster }}" alt="{{ movie_title }}" style="height: 100px; width: auto;">
+                            {{ movie_title }}
+                        </td>
+                        <td>
+                            <a href="{{ imdb_url }}" class="btn btn-sm" target="_blank">More</a>                
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">No favorite movies in this genre yet.</p>
+    {% endif %}    
+    <a class="backBtn" href="{{ url_for('home') }}">&larr; Back to All Favorites</a>
+</div>
+{% endblock %}

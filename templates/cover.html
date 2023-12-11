@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Page</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+ 
+    <div class="container vh-100 d-flex align-items-center justify-content-center">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1>CineMate</h1>
+            <p class="lead">Your Next Movie Adventure Awaits. Let CineMate be Your Guide to Cinematic Treasures.</p>
+        
+            <p>
+              <a href="{{ url_for('login') }}" class="btn btn-lg btn-secondary">Get Started</a>
+            </p>
+ 
+            <p class="mt-4">
+                New to CineMate? <a href="{{ url_for('register') }}" class="text-primary">Sign up now</a> to discover your perfect movie match.
+              </p>
+        
+          </div>
+        </div>
+      </div>
+      
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

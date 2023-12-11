@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}My Movie{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Favorite Genres Section -->
+    <div class="mb-4">
+        <p class="title">Your Favorite Genres</p>
+        <div style="display: flex;">
+        {% for genre, count in favorite_genres %}
+            <div class="card fav-card">
+                <div class="card-body fav-card-body">
+                    <a href="{{ url_for('favorites_by_genre', genre_name=genre) }}">{{ genre }}</a><br><br>              
+                    <span class="badge">{{ count }} movies</span>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+
+    <!-- Favorite Movies Section -->
+    <p class="mb-4 title" style="margin-top: 60px;">Your Favorite Movies</p>
+    {% if favorite_movies %}
+        <table class="table table-hover" style="vertical-align: middle;">
+            <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th>Genre</th>
+                    <th></th>                    
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie_title, movie_poster, imdb_url, genre in favorite_movies %}
+                    <tr>
+                        <td>
+                            <img src="{{ movie_poster }}" alt="{{ movie_title }}" style="height: 100px; width: auto;"> 
+                            {{ movie_title }}
+                        </td>
+                        <td>{{ genre }}</td>
+                        <td>
+                            <a href="{{ imdb_url }}" class="btn btn-sm" target="_blank" style="color: rgb(95, 151, 255);">More</a>
+                        </td>
+                        <td>                            
+                            <button onclick="removeFromFavorites('{{ movie_title }}')" class="btn btn-sm" style="color: rgb(255, 91, 91);">Remove</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+    
+        <div class="d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% for p in range(1, total_pages + 1) %}
+                        <li class="page-item {% if p == page %}active{% endif %}">
+                            <a class="page-link" href="{{ url_for('home', page=p) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    {% else %}
+        <p class="text-muted">No favorites added yet.</p>
+    {% endif %}
+</div>
+
+<script>
+    function removeFromFavorites(movieTitle) {
+        fetch('/remove_from_favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include CSRF token header if needed
+            },
+            body: JSON.stringify({ movie_title: movieTitle }),
+            credentials: 'include' // Include cookies for CSRF
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Movie removed from favorites');
+                // Optionally, remove the movie from the table or refresh the page
+                window.location.reload(); // Refresh page to update the list
+            } else {
+                alert('Failed to remove movie from favorites: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while trying to remove the movie from favorites.');
+        });
+    }
+</script>
+
+{% endblock %}
+
+{% block additional_css %}
+<style>
+    .list-group-item {
+        background-color: #f8f9fa; /* Light background for the genre list */
+        border: none; /* Remove borders */
+    }
+    .badge {
+        font-size: 0.9em; /* Slightly smaller badge size */
+    }
+    .table th, .table td {
+        vertical-align: middle;
+    }
+   
+</style>
+{% endblock %}

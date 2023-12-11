@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="title">Recommended Movies</h1>
+    <table class="table" style="vertical-align: middle;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Poster</th>
+                <th>Movie Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie, poster in movies_and_posters %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        {% if poster %}
+                            <img src="{{ poster }}" alt="{{ movie }}" style="height: 100px; width: auto;">
+                        {% else %}
+                            No poster available
+                        {% endif %}
+                    </td>
+                    <td>{{ movie }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}">Previous</a></li>
+                {% endif %}
+                {% for num in range(1, total_pages + 1) %}
+                <li class="page-item {% if num == page %}active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endfor %}
+                {% if page < total_pages %}
+                <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

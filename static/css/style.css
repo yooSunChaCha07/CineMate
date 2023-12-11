@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    height: 100%;
+}
+.wrapper {
+    display: flex;
+    height: 100vh; /* Use vh for full viewport height */
+}
+.content {
+    flex-grow: 1;
+    overflow: auto; /* Add scroll to content if needed */
+}
+.vh-100 { /* Remove if not used elsewhere */
+    height: 100vh;
+}
+#content {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+.card-img-top {
+    height: 350px; 
+    object-fit: cover; 
+    width: 100%; 
+}
+.sidebar {
+    width: 280px;
+    margin-right: 40px;
+    & a {
+        color: white;
+    }
+    & a:hover {
+        color: rgb(71, 71, 71);
+    }
+}
+.title {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+.fav-card {
+    width: 9rem;
+    display: inline; 
+    margin-right: 10px; 
+    background-color: rgb(241, 241, 241)!important;
+    border-color: transparent!important;
+    & a {
+        font-size: 20px;
+        color: black;
+        font-weight: bold;
+    }
+    & a:link {
+        text-decoration: none;
+    }
+    & span {
+        color: black;
+        padding: 0;
+        font-weight: 400;
+        font-size: 15px;
+    }
+}
+.pagination {
+    & .page-link {
+        border: 0;
+        color: rgb(184, 184, 184);
+    }
+    & .page-link:last-child {
+        border-radius: 0!important;
+    }
+    & .active>.page-link {
+        background-color: transparent;
+        color: black;
+    }
+}
+.backBtn {
+    color: black;
+}
+.backBtn:link {
+    text-decoration: none;
+}
+.addFavBtn {
+    padding: 0!important;
+    color: rgb(96, 178, 255)!important;
+    vertical-align: bottom;
+    bottom: 15px;
+}
+/* .card-title {
+    height: 50px;
+}
+.card-text {
+    height: 170px;
+} */

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}My Movie Search{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <p class="title">Movie Recommendation System</p>
+    <div class="input-group mb-3" style="width: 70%;">
+        <input type="text" id="movie-input" class="form-control" placeholder="Enter a movie..." aria-label="Movie title" aria-describedby="button-addon">
+        <button class="btn btn-dark" type="button" id="button-addon" style="color: white;" onclick="getRecommendations()">Recommend</button>
+    </div>
+    <div id="recommendation-list" class="row">
+        <!-- Cards will be inserted here by your script.js -->
+    </div>
+</div>
+{% endblock %}
